@@ -411,7 +411,7 @@ bool BlockchainExplorer::getPoolState(const std::vector<Hash>& knownPoolTransact
 
       node.getPoolSymmetricDifference(
         std::move(hashes),
-        reinterpret_cast<Hash&>(knownBlockchainTopHash),
+        knownBlockchainTopHash,
         isBlockchainActual,
         rawNewTransactions,
         removedTransactions,
@@ -500,7 +500,7 @@ void BlockchainExplorer::poolChanged() {
       }
       node.getPoolSymmetricDifference(
         std::move(hashes),
-        reinterpret_cast<Hash&>(knownBlockchainTop.hash),
+        knownBlockchainTop.hash,
         *isBlockchainActualPtr,
         *rawNewTransactionsPtr,
         *removedTransactionsPtr,

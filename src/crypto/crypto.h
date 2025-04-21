@@ -98,23 +98,15 @@ struct EllipticCurveScalar {
   public:
     typedef T result_type;
 
-#ifdef __clang__
-    constexpr static T min() {
-      return (std::numeric_limits<T>::min)();
+
+    constexpr static T min() { // 统一为 constexpr，移除 (min)
+      return std::numeric_limits<T>::min();
     }
 
-    constexpr static T max() {
-      return (std::numeric_limits<T>::max)();
-    }
-#else
-    static T(min)() {
-      return (std::numeric_limits<T>::min)();
+    constexpr static T max() { // 统一为 constexpr，移除 (max)
+      return std::numeric_limits<T>::max();
     }
 
-    static T(max)() {
-      return (std::numeric_limits<T>::max)();
-    }
-#endif
     typename std::enable_if<std::is_unsigned<T>::value, T>::type operator()() {
       return rand<T>();
     }
